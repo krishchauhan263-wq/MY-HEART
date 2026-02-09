@@ -238,25 +238,24 @@ function updateGame() {
         });
 
         bombs.forEach((bomb, index) => {
-    bomb.update();
-    bomb.draw();
+            bomb.update();
+            bomb.draw();
 
-    // Collision with player
-    if (
-        bomb.y + bomb.size > player.y &&
-        bomb.x > player.x &&
-        bomb.x < player.x + player.w
-    ) {
-        triggerFail();
-    }
+            // Collision with player
+            if (
+                bomb.y + bomb.size > player.y &&
+                bomb.x > player.x &&
+                bomb.x < player.x + player.w
+            ) {
+                triggerFail(); 
+            }
 
-    // Remove off-screen bomb
-    if (bomb.y > canvas.height) {
-        bombs.splice(index, 1);
-    }
-});
+            // Remove off-screen bomb
 
-
+            if (bomb.y > canvas.height) {
+                bombs.splice(index, 1);
+            }
+        });    
 
         particles.forEach((p, idx) => {
             p.update();
@@ -390,6 +389,7 @@ function typeMessage() {
         }
     }, 40); // typing speed
 }
+
 
 
 
