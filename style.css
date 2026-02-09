@@ -179,7 +179,7 @@ p {
 #celebration-screen {
     background: 
         linear-gradient(135deg, rgba(255,77,109,0.9), rgba(255,143,163,0.9)),
-        url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7");
+        url("https://www.pixelstalk.net/wp-content/uploads/image12/Two-intertwined-hearts-drawn-in-the-sand-on-a-beach-with-waves-gently-approaching-symbolizing-everlasting-love.jpg");
     background-size: cover;
     background-position: center;
     color: white;
@@ -200,3 +200,4 @@ p {
     font-size: 1.1rem;
     text-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
+
