@@ -10,6 +10,7 @@ let hearts = [];
 let particles = []; // For effects
 let animationId;
 let loveMeter = document.getElementById('love-fill');
+let beatInterval;
 
 // DOM Elements
 const startScreen = document.getElementById('start-screen');
@@ -250,11 +251,21 @@ yesBtn.addEventListener('click', () => {
     celebrationScreen.classList.remove('hidden');
     celebrationScreen.classList.add('active');
 
-    // 🎵 Play romantic music
     const music = document.getElementById('celebration-music');
-    music.volume = 0.7; // soft romantic volume
+    music.volume = 0.6;
     music.play();
+
+    const title = celebrationScreen.querySelector('h1');
+
+    // 💓 Sync heartbeat (Night Changes ~ 56–60 BPM feel)
+    beatInterval = setInterval(() => {
+        title.classList.remove('beat');
+        void title.offsetWidth; // reflow trick
+        title.classList.add('beat');
+    }, 1000); // heartbeat timing
+    typeMessage();
 });
+
 
 // "No" button runs away
 noBtn.addEventListener('mouseover', moveNoButton);
@@ -276,4 +287,28 @@ function triggerConfetti() {
 
 // Initialize
 resize();
+
+const messageText = `Hey Himakshi ❤️
+Bas itna kehna tha ki thank you meri life ka part banne ke liye 🫶
+Tumhari presence hi sab kuch better bana deti hai.
+Tumhari smile, care aur saath — sab bahut special hai mere liye 💕
+Sach mein lucky hoon jo tum meri ho.
+Always grateful for us 😌❤️
+
+— Krish 💫`;
+
+function typeMessage() {
+    const el = document.getElementById('typed-message');
+    el.innerHTML = "";
+    let i = 0;
+
+    const typing = setInterval(() => {
+        el.innerHTML += messageText.charAt(i);
+        i++;
+
+        if (i >= messageText.length) {
+            clearInterval(typing);
+        }
+    }, 40); // typing speed
+}
 
