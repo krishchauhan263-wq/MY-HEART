@@ -1,5 +1,7 @@
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
+const readyScreen = document.getElementById('ready-screen');
+const readyBtn = document.getElementById('ready-btn');
 
 // Game State
 let gameState = 'START'; // START, PLAYING, WON, PROPOSAL, END
@@ -217,15 +219,14 @@ function updateScore() {
 }
 
 function triggerProposal() {
-    gameState = 'PROPOSAL';
-    // Small delay to let the particle effect finish or just smooth transition
+    gameState = 'READY';
+
     setTimeout(() => {
-        proposalScreen.classList.remove('hidden');
-        proposalScreen.classList.add('active');
-        // Stop the loop or keep it running for background? 
-        // Let's keep loop for maybe background falling hearts but pause spawning
+        readyScreen.classList.remove('hidden');
+        readyScreen.classList.add('active');
     }, 500);
 }
+
 
 function startGame() {
     resize();
@@ -243,6 +244,15 @@ function startGame() {
 
 // Event Listeners
 startBtn.addEventListener('click', startGame);
+readyBtn.addEventListener('click', () => {
+    readyScreen.classList.remove('active');
+    readyScreen.classList.add('hidden');
+
+    proposalScreen.classList.remove('hidden');
+    proposalScreen.classList.add('active');
+
+    gameState = 'PROPOSAL';
+});
 
 yesBtn.addEventListener('click', () => {
     proposalScreen.classList.remove('active');
@@ -311,4 +321,5 @@ function typeMessage() {
         }
     }, 40); // typing speed
 }
+
 
