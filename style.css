@@ -174,3 +174,29 @@ p {
 .proposal-content h1 {
     animation: heartbeat 2s infinite;
 }
+
+/* Lovely background for last slide */
+#celebration-screen {
+    background: 
+        linear-gradient(135deg, rgba(255,77,109,0.9), rgba(255,143,163,0.9)),
+        url("https://images.unsplash.com/photo-1518895949257-7621c3c786d7");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+/* Make text more readable */
+#celebration-screen h1 {
+    color: #fff;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+
+#celebration-screen p {
+    color: #fff;
+    max-width: 800px;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
