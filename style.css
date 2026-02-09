@@ -237,3 +237,17 @@ p {
     animation: heartBeat 2.5s infinite;
 }
 
+#fail-screen {
+    background: linear-gradient(135deg, #2b2b2b, #4a0000);
+    color: white;
+}
+
+#fail-screen h1 {
+    color: #ff4d6d;
+}
+
+#retry-btn {
+    background: #ff4d6d;
+    color: white;
+}
+
