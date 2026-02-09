@@ -13,6 +13,7 @@ let particles = []; // For effects
 let animationId;
 let loveMeter = document.getElementById('love-fill');
 let beatInterval;
+let bombs = [];
 
 // DOM Elements
 const startScreen = document.getElementById('start-screen');
@@ -21,6 +22,19 @@ const celebrationScreen = document.getElementById('celebration-screen');
 const startBtn = document.getElementById('start-btn');
 const yesBtn = document.getElementById('yes-btn');
 const noBtn = document.getElementById('no-btn');
+const retryBtn = document.getElementById('retry-btn');
+
+retryBtn.addEventListener('click', () => {
+    bombs = [];
+    hearts = [];
+    score = 0;
+    updateScore();
+
+    document.getElementById('fail-screen').classList.remove('active');
+    document.getElementById('fail-screen').classList.add('hidden');
+
+    startGame();
+});
 
 // Resize Handling
 function resize() {
@@ -31,6 +45,12 @@ function resize() {
     }
 }
 window.addEventListener('resize', resize);
+
+function spawnBomb() {
+    if (Math.random() < 0.008) { // rare but scary 😈
+        bombs.push(new Bomb());
+    }
+}
 
 // Player Object
 class Player {
@@ -115,6 +135,24 @@ class Heart {
         this.y += this.speed;
     }
 }
+class Bomb {
+    constructor() {
+        this.size = 30;
+        this.x = Math.random() * (canvas.width - this.size);
+        this.y = -this.size;
+        this.speed = 4;
+    }
+
+    draw() {
+        ctx.font = `${this.size}px Arial`;
+        ctx.fillText("💣", this.x, this.y);
+    }
+
+    update() {
+        this.y += this.speed;
+    }
+}
+
 
 // Particle Effect
 class Particle {
@@ -171,6 +209,8 @@ function updateGame() {
         player.draw();
 
         spawnHeart();
+        spawnBomb();
+
 
         hearts.forEach((heart, index) => {
             heart.update();
@@ -194,8 +234,29 @@ function updateGame() {
                 }
             } else if (heart.y > canvas.height) {
                 hearts.splice(index, 1); // Missed
-            }
+            }   
         });
+
+        bombs.forEach((bomb, index) => {
+    bomb.update();
+    bomb.draw();
+
+    // Collision with player
+    if (
+        bomb.y + bomb.size > player.y &&
+        bomb.x > player.x &&
+        bomb.x < player.x + player.w
+    ) {
+        triggerFail();
+    }
+
+    // Remove off-screen bomb
+    if (bomb.y > canvas.height) {
+        bombs.splice(index, 1);
+    }
+});
+
+
 
         particles.forEach((p, idx) => {
             p.update();
@@ -225,6 +286,14 @@ function triggerProposal() {
         readyScreen.classList.remove('hidden');
         readyScreen.classList.add('active');
     }, 500);
+}
+
+function triggerFail() {
+    gameState = 'FAIL';
+    cancelAnimationFrame(animationId);
+
+    document.getElementById('fail-screen').classList.remove('hidden');
+    document.getElementById('fail-screen').classList.add('active');
 }
 
 
@@ -321,5 +390,6 @@ function typeMessage() {
         }
     }, 40); // typing speed
 }
+
 
 
