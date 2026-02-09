@@ -216,3 +216,22 @@ p {
     }
 }
 
+/* 💓 Heartbeat animation */
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+    14% {
+        transform: scale(1.08);
+    }
+    28% {
+        transform: scale(1);
+    }
+    42% {
+        transform: scale(1.08);
+    }
+    70% {
+        transform: scale(1);
+    }
+}
+
