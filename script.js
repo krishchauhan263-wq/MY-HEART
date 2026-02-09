@@ -246,9 +246,14 @@ startBtn.addEventListener('click', startGame);
 yesBtn.addEventListener('click', () => {
     proposalScreen.classList.remove('active');
     proposalScreen.classList.add('hidden');
+
     celebrationScreen.classList.remove('hidden');
     celebrationScreen.classList.add('active');
-    triggerConfetti(); // Optional: Implement confetti
+
+    // 🎵 Play romantic music
+    const music = document.getElementById('celebration-music');
+    music.volume = 0.7; // soft romantic volume
+    music.play();
 });
 
 // "No" button runs away
@@ -271,3 +276,4 @@ function triggerConfetti() {
 
 // Initialize
 resize();
+
